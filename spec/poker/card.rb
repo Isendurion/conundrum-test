@@ -6,6 +6,7 @@ class Card
                   2H 3H 4H 5H 6H 7H 8H 9H TH JH QH KH AH
                   2S 3S 4S 5S 6S 7S 8S 9S TS JS QS KS AS)
   NON_NUMERIC_RANKS = %w(T J Q K A)
+  TO_NUMERIC_CONVERSION = {T: 10, J: 11, Q: 12, K: 13, A: 14}
 
   def initialize(name)
     if CARD_NAMES.include?(name)
@@ -17,7 +18,7 @@ class Card
     @rank = name[0]
 
     if NON_NUMERIC_RANKS.include?(@rank)
-      set_value
+      @value = convert_rank_to_numeric(@rank.to_sym, TO_NUMERIC_CONVERSION)
     else
       @value = @rank.to_i
     end
@@ -32,17 +33,7 @@ class Card
   end
 
   private
-  def set_value
-    if @rank == 'T'
-      @value = 10
-    elsif @rank == 'J'
-      @value = 11
-    elsif @rank == 'Q'
-      @value = 12
-    elsif @rank == 'K'
-      @value = 13
-    elsif @rank == 'A'
-      @value = 14
-    end
+  def convert_rank_to_numeric(rank, conversion)
+    conversion[rank]
   end
 end
