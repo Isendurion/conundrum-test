@@ -15,3 +15,4 @@ Usual tasks:
 - Pay attention to working with repository the right way
 - Implement extra task after tests are green (task will be supplied by evaluator)
 - In case of being stuck at some particular problem, contact **only** evaluators for guidance
+# conundrum-test
