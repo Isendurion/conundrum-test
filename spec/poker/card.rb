@@ -5,6 +5,7 @@ class Card
                   2D 3D 4D 5D 6D 7D 8D 9D TD JD QD KD AD
                   2H 3H 4H 5H 6H 7H 8H 9H TH JH QH KH AH
                   2S 3S 4S 5S 6S 7S 8S 9S TS JS QS KS AS)
+  NON_NUMERIC_RANKS = %w(T J Q K A)
 
   def initialize(name)
     if CARD_NAMES.include?(name)
@@ -12,33 +13,35 @@ class Card
     else
       raise PokerError::InvalidCardError
     end
+    
+    @rank = name[0]
 
-    if %w(T J Q K A).include?(@name[0])
+    if NON_NUMERIC_RANKS.include?(@rank)
       set_value
     else
-      @value = @name[0].to_i
+      @value = @rank.to_i
     end
   end
 
-  def > card
+  def >(card)
     value > card.value
   end
 
-  def < card
+  def <(card)
     value < card.value
   end
 
   private
   def set_value
-    if @name[0] == 'T'
+    if @rank == 'T'
       @value = 10
-    elsif @name[0] == 'J'
+    elsif @rank == 'J'
       @value = 11
-    elsif @name[0] == 'Q'
+    elsif @rank == 'Q'
       @value = 12
-    elsif @name[0] == 'K'
+    elsif @rank == 'K'
       @value = 13
-    elsif @name[0] == 'A'
+    elsif @rank == 'A'
       @value = 14
     end
   end
