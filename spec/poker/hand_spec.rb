@@ -73,7 +73,7 @@ RSpec.describe Hand do
         three_of_kind = create_hand(%w(AH AS AD 2S KH))
 
         expect(straight > three_of_kind).to eq true
-        expect(three_of_kind < straight).to eq true
+        expect(straight < three_of_kind).to eq false
       end
     end
 
