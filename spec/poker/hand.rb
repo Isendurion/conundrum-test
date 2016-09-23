@@ -13,18 +13,18 @@ class Hand
   end
 
   def >(hand)
-    hand_values(@cards) > hand_values(hand.cards)
+    combination_value(@cards) > combination_value(hand.cards)
   end
 
   def <(hand)
-    hand_values(@cards) < hand_values(hand.cards)
+    combination_value(@cards) < combination_value(hand.cards)
   end
 
   def ==(hand)
-    hand_values(@cards) == hand_values(hand.cards)
+    combination_value(@cards) == combination_value(hand.cards)
   end
 
-  def hand_values(cards)
+  def combination_value(cards)
     if cards.first.rank == 'A' && sequential_rank?(cards) && all_the_same_suit?(cards)
       HAND_CATEGORIES[:royal_flush]
     elsif !(cards.first.rank == 'A') && sequential_rank?(cards) && all_the_same_suit?(cards)
