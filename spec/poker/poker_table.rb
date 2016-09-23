@@ -24,10 +24,6 @@ class PokerTable
     end
   end
 
-  def temp
-    p @left_hand
-    create_hand(@left_hand).cards.each{|card| p card}
-  end
 
   private
   def divide_line
