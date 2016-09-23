@@ -24,6 +24,11 @@ class PokerTable
     end
   end
 
+  def temp
+    p @left_hand
+    create_hand(@left_hand).cards.each{|card| p card}
+  end
+
   private
   def divide_line
     @left_hand = @line.split.each_slice(5).to_a[0]

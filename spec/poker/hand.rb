@@ -50,7 +50,7 @@ class Hand
 
   private
   def all_the_same_suit?(cards)
-    cards.map{|card| card.suit}.uniq.length == 1
+    cards.map(&:suit).uniq.length == 1
   end
 
   def sequential_rank?(cards)
@@ -83,11 +83,10 @@ class Hand
   end
 
   def sort_cart_values(cards)
-    cards.map{|card| card.value}.sort
+    cards.map(&:value).sort
   end
 
   def reverse_sort(cards)
     sort_cart_values(cards).reverse
   end
-
 end
