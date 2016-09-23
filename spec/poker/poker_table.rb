@@ -24,7 +24,6 @@ class PokerTable
     end
   end
 
-
   private
   def divide_line
     @left_hand = @line.split.each_slice(5).to_a[0]
