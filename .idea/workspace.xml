@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd0b10c8-b4c5-49c3-9eee-139f19978e9b" name="Default" comment="replaced conditionals with to_numeric conversion">
+    <list default="true" id="bd0b10c8-b4c5-49c3-9eee-139f19978e9b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/poker/card.rb" afterPath="$PROJECT_DIR$/spec/poker/card.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/poker/hand.rb" afterPath="$PROJECT_DIR$/spec/poker/hand.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/poker/hand_spec.rb" afterPath="$PROJECT_DIR$/spec/poker/hand_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/poker/poker_table.rb" afterPath="$PROJECT_DIR$/spec/poker/poker_table.rb" />
     </list>
     <ignored path="conundrum.iws" />
@@ -66,8 +63,8 @@
           <file leaf-file-name="poker_table.rb" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/spec/poker/poker_table.rb">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+                <state relative-caret-position="150">
+                  <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
                   <folding />
                 </state>
               </provider>
@@ -344,7 +341,7 @@
       <option name="presentableId" value="Default" />
       <updated>1474538744546</updated>
       <workItem from="1474538745719" duration="9801000" />
-      <workItem from="1474607760837" duration="11659000" />
+      <workItem from="1474607760837" duration="11697000" />
     </task>
     <task id="LOCAL-00001" summary="copied my classes from previous repo">
       <created>1474540010414</created>
@@ -374,11 +371,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474543822515</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="all tests about hand class pass">
+      <created>1474623104544</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1474623104544</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21460000" />
+    <option name="totallyTimeSpent" value="21498000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1173" extended-state="6" />
@@ -438,7 +442,8 @@
     <MESSAGE value="gived values to the cards to compare them" />
     <MESSAGE value="added @rank to Card class" />
     <MESSAGE value="replaced conditionals with to_numeric conversion" />
-    <option name="LAST_COMMIT_MESSAGE" value="replaced conditionals with to_numeric conversion" />
+    <MESSAGE value="all tests about hand class pass" />
+    <option name="LAST_COMMIT_MESSAGE" value="all tests about hand class pass" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -549,8 +554,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/poker/poker_table.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+        <state relative-caret-position="150">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
           <folding />
         </state>
       </provider>
