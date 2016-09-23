@@ -11,7 +11,6 @@ class PokerTable
   end
 
   def strongest_hand
-    get_cards(@left_hand).map(&:value).inject{|sum, value| sum + value}
     if hand_combination_tie
       if rest_cards_value(@left_hand) > rest_cards_value(@right_hand)
         'left'
@@ -25,12 +24,12 @@ class PokerTable
     end
   end
 
+  private
   def divide_line
     @left_hand = @line.split.each_slice(5).to_a[0]
     @right_hand = @line.split.each_slice(5).to_a[1]
   end
 
-  private
   def hand_combination_tie
     create_hand(@left_hand) == create_hand(@right_hand)
   end

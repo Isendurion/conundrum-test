@@ -31,17 +31,17 @@ class Hand
       HAND_CATEGORIES[:straight_flush]
     elsif four_of_a_kind?(cards)
       HAND_CATEGORIES[:four_of_a_kind]
-    elsif full_house?(cards)
+    elsif combination_match?(cards, [2, 3])
       HAND_CATEGORIES[:full_house]
     elsif all_the_same_suit?(cards) && !(sequential_rank?(cards))
       HAND_CATEGORIES[:flush]
     elsif sequential_rank?(cards) && !(all_the_same_suit?(cards))
       HAND_CATEGORIES[:straight]
-    elsif three_of_a_kind?(cards)
+    elsif combination_match?(cards, [1, 1, 3])
       HAND_CATEGORIES[:three_of_kind]
-    elsif two_pairs?(cards)
+    elsif combination_match?(cards, [1, 2, 2])
       HAND_CATEGORIES[:two_pairs]
-    elsif one_pair?(cards)
+    elsif combination_match?(cards, [1, 1, 1, 2])
       HAND_CATEGORIES[:one_pair]
     else
       HAND_CATEGORIES[:high_card]
@@ -49,29 +49,13 @@ class Hand
   end
 
   private
-  def count_cards(cards)
-    h = {}
-    sort_from_the_highest(cards).each do |value|
-      if h[value].nil?
-        h[value] = 1
-      else
-        h[value] += 1
-      end
-    end
-    h
-  end
-
-  def sort_from_the_highest(cards)
-    cards.map{|card| card.value}.sort.reverse
-  end
-
   def all_the_same_suit?(cards)
     cards.map{|card| card.suit}.uniq.length == 1
   end
 
   def sequential_rank?(cards)
     result = []
-    value_ary = cards.map{|card| card.value}.sort
+    value_ary = sort_cart_values(cards).sort
     value_ary.each_with_index do |value, index|
       if value == value_ary.first
         next
@@ -83,22 +67,27 @@ class Hand
   end
 
   def four_of_a_kind?(cards)
-    count_cards(cards).map{|_, value| value == 4}.any?
+    count_equal_elements(cards).map{|_, value| value == 4}.any?
   end
 
-  def full_house?(cards)
-    count_cards(cards).map{|_, value| value}.sort == [2, 3]
+  def combination_match?(cards, ary)
+    count_equal_elements(cards).map{|_, value| value}.sort == ary
   end
 
-  def three_of_a_kind?(cards)
-    count_cards(cards).map{|_, value| value}.sort == [1, 1, 3]
+  def count_equal_elements(cards)
+    result = {}
+    reverse_sort(cards).each do |occurrence|
+      result[occurrence].nil? ? result[occurrence] = 1 : result[occurrence] += 1
+    end
+    result
   end
 
-  def two_pairs?(cards)
-    count_cards(cards).map{|_, value| value}.sort == [1, 2, 2]
+  def sort_cart_values(cards)
+    cards.map{|card| card.value}.sort
   end
 
-  def one_pair?(cards)
-    count_cards(cards).map{|_, value| value}.sort == [1, 1, 1, 2]
+  def reverse_sort(cards)
+    sort_cart_values(cards).reverse
   end
+
 end
