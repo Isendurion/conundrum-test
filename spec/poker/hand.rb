@@ -20,10 +20,6 @@ class Hand
     combination_value(@cards) < combination_value(hand.cards)
   end
 
-  # def ==(hand)
-  #   combination_value(@cards) == combination_value(hand.cards)
-  # end
-
   def combination_value(cards)
     if cards.first.rank == 'A' && sequential_rank?(cards) && all_the_same_suit?(cards)
       HAND_CATEGORIES[:royal_flush]

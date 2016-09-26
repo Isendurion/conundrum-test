@@ -4,7 +4,6 @@
     <list default="true" id="bd0b10c8-b4c5-49c3-9eee-139f19978e9b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/poker/hand.rb" afterPath="$PROJECT_DIR$/spec/poker/hand.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/poker/poker_table.rb" afterPath="$PROJECT_DIR$/spec/poker/poker_table.rb" />
     </list>
     <ignored path="conundrum.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,17 +84,17 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="hand.rb" pinned="false" current-in-tab="false">
+          <file leaf-file-name="hand.rb" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/spec/poker/hand.rb">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="207">
-                  <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+                <state relative-caret-position="300">
+                  <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="poker_table.rb" pinned="false" current-in-tab="true">
+          <file leaf-file-name="poker_table.rb" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/spec/poker/poker_table.rb">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="0">
@@ -121,9 +120,9 @@
         <option value="$PROJECT_DIR$/spec/poker/card.rb" />
         <option value="$PROJECT_DIR$/spec/poker/hand_spec.rb" />
         <option value="$PROJECT_DIR$/spec/poker/poker_tablet.rb" />
-        <option value="$PROJECT_DIR$/spec/poker/hand.rb" />
         <option value="$PROJECT_DIR$/spec/poker/poker_table_spec.rb" />
         <option value="$PROJECT_DIR$/spec/poker/poker_table.rb" />
+        <option value="$PROJECT_DIR$/spec/poker/hand.rb" />
       </list>
     </option>
   </component>
@@ -418,7 +417,7 @@
       <workItem from="1474538745719" duration="9801000" />
       <workItem from="1474607760837" duration="20641000" />
       <workItem from="1474635050849" duration="2725000" />
-      <workItem from="1474869118134" duration="8478000" />
+      <workItem from="1474869118134" duration="8583000" />
     </task>
     <task id="LOCAL-00001" summary="copied my classes from previous repo">
       <created>1474540010414</created>
@@ -504,11 +503,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474634597941</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="strongest_hand method updated">
+      <created>1474878690887</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1474878690887</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41645000" />
+    <option name="totallyTimeSpent" value="41750000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1173" extended-state="6" />
@@ -575,7 +581,8 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value=" next refactoring" />
     <MESSAGE value="ref" />
-    <option name="LAST_COMMIT_MESSAGE" value="ref" />
+    <MESSAGE value="strongest_hand method updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="strongest_hand method updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -802,14 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/poker/hand.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.3.0/gems/ruby-debug-ide-0.6.1.beta2/lib/ruby-debug-ide.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
@@ -838,6 +837,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/poker/hand.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding />
         </state>
       </provider>
