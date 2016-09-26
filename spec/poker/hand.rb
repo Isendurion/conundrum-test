@@ -1,5 +1,6 @@
 class Hand
-  attr_accessor :cards
+
+  attr_accessor :cards, :hand_categories
 
   HAND_CATEGORIES = { royal_flush: 9, straight_flush: 8, four_of_a_kind: 7, full_house: 6, flush: 5,
                       straight: 4, three_of_kind: 3, two_pairs: 2, one_pair: 1, high_card: 0         }
@@ -10,6 +11,7 @@ class Hand
     else
       @cards = cards
     end
+    @hand_categories = HAND_CATEGORIES
   end
 
   def >(hand)
@@ -21,68 +23,58 @@ class Hand
   end
 
   def combination_value(cards)
-    if cards.first.rank == 'A' && sequential_rank?(cards) && all_the_same_suit?(cards)
-      HAND_CATEGORIES[:royal_flush]
+    if first_card_rank(cards) == 'A' && sequential_rank?(cards) && all_the_same_suit?(cards)
+      hand_categories[:royal_flush]
     elsif !(cards.first.rank == 'A') && sequential_rank?(cards) && all_the_same_suit?(cards)
-      HAND_CATEGORIES[:straight_flush]
-    elsif four_of_a_kind?(cards)
-      HAND_CATEGORIES[:four_of_a_kind]
+      hand_categories[:straight_flush]
+    elsif count_equal_elements(cards).has_value?(4)
+      hand_categories[:four_of_a_kind]
     elsif combination_match?(cards, [2, 3])
-      HAND_CATEGORIES[:full_house]
+      hand_categories[:full_house]
     elsif all_the_same_suit?(cards) && !(sequential_rank?(cards))
-      HAND_CATEGORIES[:flush]
+      hand_categories[:flush]
     elsif sequential_rank?(cards) && !(all_the_same_suit?(cards))
-      HAND_CATEGORIES[:straight]
+      hand_categories[:straight]
     elsif combination_match?(cards, [1, 1, 3])
-      HAND_CATEGORIES[:three_of_kind]
+      hand_categories[:three_of_kind]
     elsif combination_match?(cards, [1, 2, 2])
-      HAND_CATEGORIES[:two_pairs]
+      hand_categories[:two_pairs]
     elsif combination_match?(cards, [1, 1, 1, 2])
-      HAND_CATEGORIES[:one_pair]
+      hand_categories[:one_pair]
     else
-      HAND_CATEGORIES[:high_card]
+      hand_categories[:high_card]
     end
   end
 
   def count_equal_elements(cards)
     result = {}
-    reverse_sort(cards).each do |occurrence|
+    sort_card_values(cards).each do |occurrence|
       result[occurrence].nil? ? result[occurrence] = 1 : result[occurrence] += 1
     end
     result
   end
 
   private
+  def first_card_rank(cards)
+    cards.first.rank
+  end
   def all_the_same_suit?(cards)
     cards.map(&:suit).uniq.length == 1
   end
 
   def sequential_rank?(cards)
-    result = []
-    value_ary = sort_cart_values(cards).sort
-    value_ary.each_with_index do |value, index|
-      if value == value_ary.first
-        next
-      else
-        result << (value_ary[index-1]+1 == value_ary[index])
+    value_ary = sort_card_values(cards)
+    value_ary.map!.with_index do |value, index|
+      value == value_ary.last ? true : value+1 == value_ary[index+1]
       end
-    end
-    result.all?
+    value_ary.all?
   end
 
-  def four_of_a_kind?(cards)
-    count_equal_elements(cards).map{|_, value| value == 4}.any?
+  def combination_match?(cards, pattern)
+    count_equal_elements(cards).values.sort == pattern
   end
 
-  def combination_match?(cards, ary)
-    count_equal_elements(cards).map{|_, value| value}.sort == ary
-  end
-
-  def sort_cart_values(cards)
+  def sort_card_values(cards)
     cards.map(&:value).sort
-  end
-
-  def reverse_sort(cards)
-    sort_cart_values(cards).reverse
   end
 end
