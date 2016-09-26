@@ -20,9 +20,9 @@ class Hand
     combination_value(@cards) < combination_value(hand.cards)
   end
 
-  def ==(hand)
-    combination_value(@cards) == combination_value(hand.cards)
-  end
+  # def ==(hand)
+  #   combination_value(@cards) == combination_value(hand.cards)
+  # end
 
   def combination_value(cards)
     if cards.first.rank == 'A' && sequential_rank?(cards) && all_the_same_suit?(cards)
@@ -46,6 +46,14 @@ class Hand
     else
       HAND_CATEGORIES[:high_card]
     end
+  end
+
+  def count_equal_elements(cards)
+    result = {}
+    reverse_sort(cards).each do |occurrence|
+      result[occurrence].nil? ? result[occurrence] = 1 : result[occurrence] += 1
+    end
+    result
   end
 
   private
@@ -72,14 +80,6 @@ class Hand
 
   def combination_match?(cards, ary)
     count_equal_elements(cards).map{|_, value| value}.sort == ary
-  end
-
-  def count_equal_elements(cards)
-    result = {}
-    reverse_sort(cards).each do |occurrence|
-      result[occurrence].nil? ? result[occurrence] = 1 : result[occurrence] += 1
-    end
-    result
   end
 
   def sort_cart_values(cards)
