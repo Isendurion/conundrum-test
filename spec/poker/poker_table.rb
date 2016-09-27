@@ -17,40 +17,16 @@ class PokerTable
       elsif tie_type(:full_house) || tie_type(:three_of_kind)
         number_of_same_values(3)
       elsif tie_type(:flush)
-        equal_at_index?(index: 0, if_not: equal_at_index?(index: 1, if_not: equal_at_index?(index: 2, if_not: equal_at_index?(index: 3, if_not: equal_at_index?(index: 4, if_not: 'tie')))))
+        equal_at_position(position: 0, if_equal: equal_at_position(position: 1, if_equal: equal_at_position(position: 2, if_equal: equal_at_position(position: 3, if_equal: equal_at_position(position: 4, if_equal: 'tie')))))
       elsif tie_type(:two_pairs)
-        if hand_to_hash(@left_hand).select{|_, value| value == 2}.keys[0] > hand_to_hash(@right_hand).select{|_, value| value == 2}.keys[0]
-          'left'
-        elsif hand_to_hash(@left_hand).select{|_, value| value == 2}.keys[0] < hand_to_hash(@right_hand).select{|_, value| value == 2}.keys[0]
-          'right'
-        else
-          hand_to_hash(@left_hand).select{|_, value| value == 2}.keys[1] > hand_to_hash(@right_hand).select{|_, value| value == 2}.keys[1] ? 'left' : 'right'
-        end
+        compare_values(given_value: 2, position: 0, if_equal: compare_values(given_value: 2, position: 1, if_equal: 'tie'))
       else
-        if hand_to_hash(@left_hand).key(2) > hand_to_hash(@right_hand).key(2)
+        if @left_hand.to_h.key(2) > @right_hand.to_h.key(2)
           'left'
-        elsif hand_to_hash(@left_hand).key(2) < hand_to_hash(@right_hand).key(2)
+        elsif @right_hand.to_h.key(2) > @left_hand.to_h.key(2)
           'right'
         else
-          if hand_to_hash(@left_hand).select{|_, value| value == 1}.keys[0] > hand_to_hash(@right_hand).select{|_, value| value == 1}.keys[0]
-            'left'
-          elsif hand_to_hash(@left_hand).select{|_, value| value == 1}.keys[0] < hand_to_hash(@right_hand).select{|_, value| value == 1}.keys[0]
-            'right'
-          else
-            if hand_to_hash(@left_hand).select{|_, value| value == 1}.keys[1] > hand_to_hash(@right_hand).select{|_, value| value == 1}.keys[1]
-              'left'
-            elsif hand_to_hash(@left_hand).select{|_, value| value == 1}.keys[1] < hand_to_hash(@right_hand).select{|_, value| value == 1}.keys[1]
-              'right'
-            else
-              if hand_to_hash(@left_hand).select{|_, value| value == 1}.keys[2] > hand_to_hash(@right_hand).select{|_, value| value == 1}.keys[2]
-                'left'
-              elsif hand_to_hash(@left_hand).select{|_, value| value == 1}.keys[2] < hand_to_hash(@right_hand).select{|_, value| value == 1}.keys[2]
-                'right'
-              else
-                'tie'
-              end
-            end
-          end
+          compare_values(given_value: 1, position: 0, if_equal: compare_values(given_value: 1, position: 1, if_equal: compare_values(given_value: 1, position: 2, if_equal: 'tie')))
         end
       end
     else
@@ -59,24 +35,38 @@ class PokerTable
   end
 
   private
-  def equal_at_index?(index:, if_not:)
-    if @left_hand.cards.map(&:value).sort.reverse[index] > @right_hand.cards.map(&:value).sort.reverse[index]
+  def compare_values(given_value:, position:, if_equal:)
+    if position_value(@left_hand, given_value, position) > position_value(@right_hand, given_value, position)
       'left'
-    elsif @left_hand.cards.map(&:value).sort.reverse[index] < @right_hand.cards.map(&:value).sort.reverse[index]
+    elsif position_value(@right_hand, given_value, position) > position_value(@left_hand, given_value, position)
       'right'
     else
-      if_not
+      if_equal
+    end
+  end
+
+  def position_value(hand, v, p)
+    hand.to_h.select{|_, value| value == v}.keys[p]
+  end
+
+  def equal_at_position(position:, if_equal:)
+    if @left_hand.sort_card_values.reverse[position] > @right_hand.sort_card_values.reverse[position]
+      'left'
+    elsif @right_hand.sort_card_values.reverse[position] > @left_hand.sort_card_values.reverse[position]
+      'right'
+    else
+      if_equal
     end
   end
 
   def number_of_same_values(num)
-    hand_to_hash(@left_hand).key(num) > hand_to_hash(@right_hand).key(num) ? 'left' : 'right'
+    @left_hand.to_h.key(num) > @right_hand.to_h.key(num) ? 'left' : 'right'
   end
 
   def hand_value_check
-    if cards_value(@left_hand.cards) > cards_value(@right_hand.cards)
+    if @left_hand.sum_cards_value > @right_hand.sum_cards_value
       'left'
-    elsif cards_value(@left_hand.cards) < cards_value(@right_hand.cards)
+    elsif @right_hand.sum_cards_value > @left_hand.sum_cards_value
       'right'
     else
       'tie'
@@ -84,11 +74,7 @@ class PokerTable
   end
 
   def tie_type(combination)
-    @left_hand.combination_value(@left_hand.cards) == @left_hand.hand_categories[combination]
-  end
-
-  def hand_to_hash(hand)
-    hand.count_equal_elements(hand.cards)
+    @left_hand.combination_value == @left_hand.hand_categories[combination]
   end
 
   def divide_line
@@ -103,15 +89,11 @@ class PokerTable
   end
 
   def combination_tie?
-    if @left_hand.combination_value(@left_hand.cards) != 0
-      @left_hand.combination_value(@left_hand.cards) == @right_hand.combination_value(@right_hand.cards)
+    if @left_hand.combination_value != 0
+      @left_hand.combination_value == @right_hand.combination_value
     else
       false
     end
-  end
-
-  def cards_value(cards)
-    cards.map(&:value).inject{|sum, value| sum + value}
   end
 
   def create_hand(card_codes)
